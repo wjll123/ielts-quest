@@ -2,12 +2,7 @@
 
 一个把雅思备考变成游戏闯关的个人学习工具。40天、三阶段、四个科目轮转——你不需要想"今天该学什么"，只需要打开、打卡、完成。
 
-<p align="center">
-  <img src="public/images/map.png" alt="地图视图 - 40关三阶段学习路线" width="240" />
-  <img src="public/images/level.png" alt="每日关卡 - 回顾+主任务+记录" width="240" />
-  <img src="public/images/daily-log.png" alt="每日记录 - 三问复盘" width="240" />
-  <img src="public/images/profile.png" alt="个人页 - 数据/徽章/商店/道具" width="240" />
-</p>
+> 截图请直接在 GitHub 仓库页面查看，或 clone 后运行 `npm run dev` 体验。
 
 ## 为什么做这个
 
