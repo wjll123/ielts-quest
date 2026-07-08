@@ -1,16 +1,141 @@
-# React + Vite
+# ielts-quest
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个把雅思备考变成游戏闯关的个人学习工具。40天、三阶段、四个科目轮转——你不需要想"今天该学什么"，只需要打开、打卡、完成。
 
-Currently, two official plugins are available:
+<p align="center">
+  <img src="public/images/map.png" alt="地图视图 - 40关三阶段学习路线" width="240" />
+  <img src="public/images/level.png" alt="每日关卡 - 回顾+主任务+记录" width="240" />
+  <img src="public/images/daily-log.png" alt="每日记录 - 三问复盘" width="240" />
+  <img src="public/images/profile.png" alt="个人页 - 数据/徽章/商店/道具" width="240" />
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 为什么做这个
 
-## React Compiler
+备考雅思最难的从来不是英语。是每天坐到桌前，然后问自己：今天干什么？
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+ielts-quest 把这个决定替你做完了。40天的路线图已经铺好，四个科目轮换，每天打开就知道该做什么。你做完了勾一下，系统帮你记分、记连续天数、记每个科目的完成量。它就是那个比你更清楚你走到哪了的训练伙伴。
 
-## Expanding the ESLint configuration
+## 功能
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**40天三阶段学习路线**
+
+第一阶段「技巧补完」（1-14天）— 建立节奏，学习方法。何琼网课、Simon写作、Tara口语、阅读真经总纲。
+
+第二阶段「刷题迭代」（15-28天）— 剑桥真题精听精读，王陆语料库，计时写作，当季口语题库。
+
+第三阶段「模考冲刺」（29-40天）— 全真模考，错题回顾，考前定型。
+
+**科目轮转**
+
+按照「听力→阅读→写作→口语→听力→阅读→写作+口语」的7天周期自动轮换，四个科目均衡推进，不会出现"一直在练听力、写作碰都没碰"。
+
+**每日关卡**
+
+每天拆成三个模块：回顾（10分钟，先看昨天的错）→ 主任务（80分钟，今天核心学习内容）→ 记录（10分钟，写下收获和明天要重做的事）。必做任务勾完才能闯关，跳过回顾会扣一颗心。
+
+**每日记录**
+
+每天三问：今天错了什么？为什么错？明天重做什么？替代所有零散的笔记本。历史记录可以回看最近7天。
+
+**游戏化系统**
+
+- 经验值（XP）— 完成关卡和记录获得，量化学习投入
+- 宝石（Gem）— 完成关卡获得，可在商店消费
+- 红心（Heart）— 共5颗，跳过回顾扣1颗，0颗无法继续闯关
+- 连续打卡（Streak）— 连续完成关卡的天数，断了从零开始
+- 10种徽章 — 初心者、三连击、周循环、反思者、迭代王、精听达人、开口说、阶段通关、全勤、终极挑战
+- 商店道具 — 冻结保护（保护连续记录）、跳过回顾、双倍经验
+
+**纯本地，零依赖后端**
+
+所有数据存在浏览器的 localStorage 里，不需要登录、不需要服务器、不需要数据库。你的学习数据只在你自己的设备上。
+
+## 技术栈
+
+| 类别 | 技术 |
+|------|------|
+| 框架 | React 19 |
+| 构建工具 | Vite 8 |
+| 样式 | Tailwind CSS 4 |
+| 路由 | React Router 7 (HashRouter) |
+| 状态管理 | Zustand |
+| 数据持久化 | localStorage |
+| 语言 | JavaScript (JSX) |
+
+## 快速开始
+
+```bash
+# 克隆项目
+git clone https://github.com/wjll123/ielts-quest.git
+cd ielts-quest
+
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 构建生产版本
+npm run build
+```
+
+打开浏览器访问 `http://localhost:5173/ielts-quest/` 即可使用。手机浏览器也能直接打开——它是为移动端设计的。
+
+## 项目结构
+
+```
+ielts-quest/
+├── src/
+│   ├── components/
+│   │   ├── MapNode.jsx          # 地图上的关卡节点组件
+│   │   └── NavBar.jsx           # 底部导航栏
+│   ├── data/
+│   │   ├── levels.js            # 40关完整学习路线数据生成器
+│   │   └── badges.js            # 徽章定义 + 商店道具
+│   ├── pages/
+│   │   ├── MapPage.jsx          # 地图主页（三阶段关卡总览）
+│   │   ├── LevelPage.jsx        # 每日关卡详情（勾任务、闯关）
+│   │   ├── DailyLogPage.jsx     # 每日记录（三问复盘）
+│   │   └── ProfilePage.jsx      # 个人页（数据、徽章、商店、道具栏）
+│   ├── store/
+│   │   └── useStore.js          # Zustand 状态管理（进度、任务、日志）
+│   ├── App.jsx                  # 路由入口
+│   ├── main.jsx                 # React 入口
+│   └── index.css                # Tailwind + 全局样式
+├── public/
+│   └── images/                  # 截图
+└── package.json
+```
+
+## 游戏机制详解
+
+### 关卡流程
+
+每天的关卡包含必做任务和选做任务。把必做任务全部勾完，点击「完成关卡」按钮，获得 XP 和宝石。如果回顾任务没勾直接闯关，扣1颗心。
+
+### 科目统计
+
+个人页展示四个科目各自完成的次数，以及10种徽章墙。徽章根据实际行为自动判定——连续打卡、完成某科目N次、写作重写N次等。
+
+### 商店系统
+
+用闯关获得的宝石在商店购买道具：冻结保护（保护连续记录1天不断）、跳过回顾、双倍经验（下一关XP翻倍）。道具在道具栏显示，使用时自动生效。
+
+## 设计理念
+
+- 决定优于选择：不给每天留"今天学什么"的决策空间。路线铺好，你只负责执行。
+- 回顾重于新知：每天的关卡都从"看昨天的错"开始。遗忘曲线的敌人不是记忆，是复习。
+- 打卡感：连续天数、徽章、经验值——不是游戏化套路，是给大脑一个"今天也要来"的提示。
+- 离线可用：纯前端，无后端，不需要网络。在图书馆、通勤路上都能用。
+
+## 后续计划
+
+- [ ] 关卡内容可自定义（用户编辑自己的学习任务）
+- [ ] 学习数据导出（Markdown / CSV）
+- [ ] 更多图表：每周投入时间趋势、科目强弱对比
+- [ ] PWA 支持（可安装到手机桌面，离线使用）
+- [ ] TypeScript 迁移
+
+---
+
+Made with vibe coding. Built for one person's IELTS journey — if it helps yours too, that's even better.
